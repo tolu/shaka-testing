@@ -1,5 +1,7 @@
 # Testing shaka-player for rikstv / strim
 
+- https://github.com/googlearchive/sample-media-pwa
+
 - https://shaka-player-demo.appspot.com/docs/api/tutorial-debugging.html
 
 - https://github.com/raskri/react-shaka-player/blob/master/src/components/player/Player.js
