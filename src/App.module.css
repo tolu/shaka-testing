@@ -1,5 +1,5 @@
-
-.appHeader {
+.app {
+  text-align: center;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -12,4 +12,9 @@
 
 .appLink {
   color: #61dafb;
+}
+
+.input {
+  width: 30ch;
+  line-height: 1.5;
 }
