@@ -2,7 +2,7 @@
 import styles from './App.module.css';
 import { Player } from './Player';
 import { useAccessToken } from './TokenConfig';
-import { VideoSelector } from './VideoSelector';
+import { VideoSelector } from './components/VideoSelector/VideoSelector';
 
 const manifests = {
   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls-apple/master.m3u8',
@@ -21,20 +21,19 @@ function App() {
       </div>
     );
   }
-  const expDate = new Date(token.expires);
+  const validityHours = (token.expires - Date.now())/1000/60/60;
 
   return (
     <div className={styles.app}>
       <header>
-        <p>Strim Shaka Experiment</p>
-        <p>{`Token valid until: ${new Intl.DateTimeFormat('en', {
-          dateStyle: 'full',
-          timeStyle: 'long',
-        }).format(expDate)}`}</p>
+        <h1>Shaka Experimenting</h1>
+        <p>{`Token expires ${new Intl.RelativeTimeFormat('en', {
+          style: 'long',
+        }).format(validityHours, 'hours')}`}</p>
       </header>
       <main>
         <Player manifestUrl={manifests.nrkHls} />
-        <VideoSelector />
+        <VideoSelector accessToken={token.value} />
       </main>
     </div>
   );

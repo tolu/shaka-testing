@@ -1,10 +1,11 @@
-export const getStartPageLists = async () => {
-  const res = await fetch('https://contentlayout.rikstv.no/1/pages/start');
+
+export const getStartPageLists = async (options?: RequestInit) => {
+  const res = await fetch('https://contentlayout.rikstv.no/1/pages/start', options);
   return (await res.json()) as StartPageResponse;
 };
 
-export const getSwimlaneItems = async (url: string) => {
-  const res = await fetch(url);
+export const getSwimlaneItems = async (url: string, options?: RequestInit) => {
+  const res = await fetch(url, options);
   const data = (await res.json()) as SwimlaneItem[];
   return data.filter(({ streamingMode }) => streamingMode === 'OnDemand');
 };
