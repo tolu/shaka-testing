@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
-// shaka and mux imported in index.html
-
+// mux.js is imported in index.html
+import shaka from 'shaka-player';
 import './App.css'
+
 
 const manifests = {
   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls-apple/master.m3u8',
@@ -80,8 +81,8 @@ const Player: React.FC<{manifestUrl?:string}> = ({manifestUrl}) => {
       <video
         controls
         ref={vid}
-        width="360"
-        poster="//shaka-player-demo.appspot.com/assets/poster.jpg">
+        width="540"
+        poster="https://gfx.nrk.no/CPyQLoJSo0GJ74VSznQqVwSlZmEmK6-eL4QQ_hAZIVdg">
         </video>
     </section>
   );
