@@ -1,8 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 // mux.js is imported in index.html
 import shaka from 'shaka-player';
-import './App.css'
-
+import styles from './App.module.css'
 
 const manifests = {
   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls-apple/master.m3u8',
@@ -30,8 +29,8 @@ const getDrmConfig = (type: keyof typeof drmMap, license: string) => ({
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className={styles.app}>
+      <header className={styles.appHeader}>
         <p>Strim Shaka Experiment</p>
         <Player manifestUrl={manifests.nrkHls} />
       </header>
