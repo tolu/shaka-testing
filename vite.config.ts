@@ -10,8 +10,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['shaka-player']
-  },
-  esbuild: {
-    jsxInject: `import React from 'react'`
   }
 })

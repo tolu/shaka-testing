@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
 // mux.js is imported in index.html
 import styles from './App.module.css'
 import { Player } from './Player';
 import { useAccessToken } from './TokenConfig';
+import { VideoSelector } from './VideoSelector';
 
 const manifests = {
   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls-apple/master.m3u8',
@@ -31,6 +31,7 @@ function App() {
       </header>
       <main>
         <Player manifestUrl={manifests.nrkHls} />
+        <VideoSelector />
       </main>
     </div>
   )

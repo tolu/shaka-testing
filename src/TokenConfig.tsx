@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useState } from "react";
+import { FC, useCallback, useState } from "react";
 import jwtDecode from 'jwt-decode';
 
 const tokenStorageKey = '_ats';
@@ -8,11 +8,13 @@ const getAccessTokenFromStorage = () => {
   try {
     const parsed = JSON.parse(value);
     if (parsed.value && parsed.expires > Date.now()) {
+      console.log('Found stored token', parsed);
       return parsed as { value: string; expires: number; };
     }
-  } catch {
-    return null;
+  } catch(err) {
+    console.error('Failed to parse token', err);
   }
+  return null;
 }
 
 export const useAccessToken = () => {
@@ -37,9 +39,9 @@ export const useAccessToken = () => {
 const TokenConfig: FC<{setToken: (value: string) => void }> = ({setToken}) => {
   return (
     <>
-    <h1>Paste token to continue</h1>
-    <label>Access Token</label>
-    <input style={{minWidth:'30ch'}} onChange={({target}) => setToken(target.value)}></input>
+      <h1>Paste token to continue</h1>
+      <label>Access Token:</label>
+      <input style={{minWidth:'30ch', fontSize: '1.5rem'}} onChange={({target}) => setToken(target.value)}></input>
     </>
   )
 }

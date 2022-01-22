@@ -1,4 +1,4 @@
-import React, { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import shaka from 'shaka-player';
 
 export const Player: React.FC<{manifestUrl?:string}> = ({manifestUrl}) => {
