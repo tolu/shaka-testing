@@ -23,4 +23,3 @@ https://www.widevine.com/solutions/shaka-player
 https://teltoo.com/shaka-player/
 
 https://stackoverflow.com/questions/62596654/playing-hls-m3u8-using-shaka-player-on-chrome
-

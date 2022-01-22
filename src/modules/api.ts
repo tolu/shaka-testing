@@ -1,59 +1,58 @@
-
 export const getStartPageLists = async () => {
   const res = await fetch('https://contentlayout.rikstv.no/1/pages/start');
-  return await res.json() as StartPageResponse;
-}
+  return (await res.json()) as StartPageResponse;
+};
 
 export const getSwimlaneItems = async (url: string) => {
   const res = await fetch(url);
-  const data = await res.json() as SwimlaneItem[];
-  return data.filter(({streamingMode}) => streamingMode === 'OnDemand');
-}
+  const data = (await res.json()) as SwimlaneItem[];
+  return data.filter(({ streamingMode }) => streamingMode === 'OnDemand');
+};
 
 interface StartPageResponse {
-  id:             string;
-  slug:           string;
-  title:          string;
+  id: string;
+  slug: string;
+  title: string;
   lastUpdatedUtc: Date;
-  swimlanes:      Swimlane[];
+  swimlanes: Swimlane[];
   inSubscription: boolean;
-  experiments:    any[];
+  experiments: any[];
 }
 
 interface Swimlane {
-  id:             string;
-  name:           string;
-  type:           'ContinueWatching' |  'Default' |  'Menu' |  'MyList' |  'OnTvNow';
-  style:          string;
-  link:           string;
+  id: string;
+  name: string;
+  type: 'ContinueWatching' | 'Default' | 'Menu' | 'MyList' | 'OnTvNow';
+  style: string;
+  link: string;
   supportsPaging: boolean;
   lastUpdatedUtc: Date;
 }
 
 interface SwimlaneItem {
-  id:                        string;
-  card:                      Card;
-  originChannel:             OriginChannel;
-  broadcastedTime:           Date;
-  publishFromUtc:            Date;
-  publishToUtc:              Date;
-  season?:                   number;
-  episode?:                  number;
-  titleType:                 TitleType;
-  streamingMode:             StreamingMode;
-  originalTitle?:            string;
-  inCatchupArchive?:         boolean;
-  _links:                    SwimlaneItemLinks;
+  id: string;
+  card: Card;
+  originChannel: OriginChannel;
+  broadcastedTime: Date;
+  publishFromUtc: Date;
+  publishToUtc: Date;
+  season?: number;
+  episode?: number;
+  titleType: TitleType;
+  streamingMode: StreamingMode;
+  originalTitle?: string;
+  inCatchupArchive?: boolean;
+  _links: SwimlaneItemLinks;
 }
 
 interface SwimlaneItemLinks {
-  details:                     HalLink;
-  coverPage:                   HalLink;
-  series?:                     HalLink;
-  nextEpisode?:                HalLink;
-  wish:                        HalLink;
+  details: HalLink;
+  coverPage: HalLink;
+  series?: HalLink;
+  nextEpisode?: HalLink;
+  wish: HalLink;
   excludeFromContinueWatching: HalLink;
-  universalplay:               HalLink;
+  universalplay: HalLink;
 }
 
 interface HalLink {
@@ -61,30 +60,30 @@ interface HalLink {
 }
 
 interface Behavior {
-  from:   Date;
-  to:     Date;
+  from: Date;
+  to: Date;
   target: 'OpenCoverPage' | 'PlayChannel';
 }
 
 interface Card {
-  title:     string;
-  image:     string;
+  title: string;
+  image: string;
   subtitles: Subtitle[];
   behaviors: Behavior[];
 }
 
 interface Subtitle {
-  from:  Date;
-  to:    Date;
+  from: Date;
+  to: Date;
   value: string;
 }
 
 interface OriginChannel {
-  channelId:        number;
-  serviceName:      string;
+  channelId: number;
+  serviceName: string;
   logoUrlSvgSquare: string;
 }
 
-type StreamingMode = "External" | "OnDemand";
+type StreamingMode = 'External' | 'OnDemand';
 
-type TitleType = "Linear" | "SVOD";
+type TitleType = 'Linear' | 'SVOD';

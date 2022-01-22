@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "types": [
-      "vite/client",
-      "shaka-player/dist"
-    ],
+    "types": ["vite/client", "shaka-player/dist"],
     "allowJs": false,
     "skipLibCheck": false,
     "esModuleInterop": true,
