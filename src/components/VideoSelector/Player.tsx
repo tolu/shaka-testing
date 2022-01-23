@@ -16,33 +16,36 @@ export const Player: React.FC<{ playable: PlayerModel }> = ({ playable }) => {
         player.current = new shaka.Player(video.current);
         if (player.current) {
           player.current.addEventListener('error', console.error);
-          if (playable.licenseUrl) {
-            player.current.configure({
-              drm: {
-                ...getDrmConfig(playable.mediaFormat, playable.licenseUrl),
-              },
-            });
-          }
         }
-        // player.current.con
         setLoading(s => false);
       }
     },
     [playable]
   );
   useEffect(() => {
-    if (player.current && playable) {
-      console.log('loading manifest', playable.manifestUrl);
-      player.current
-        .load(playable.manifestUrl)
-        .then(() => {
+    const go = async () => {
+
+      if (player.current && playable) {
+        if (playable.licenseUrl && playable.mediaFormat !== 'none') {
+          console.log('configure drm...', playable.mediaFormat);
+          await player.current.unload();
+          player.current.configure({
+            drm: {
+              ...getDrmConfig(playable.mediaFormat, playable.licenseUrl),
+            },
+          });
+        }
+        console.log('loading manifest', playable.manifestUrl);
+        try {
+          await player.current.load(playable.manifestUrl)
           // This runs if the asynchronous load is successful.
           console.log('The video has now been loaded! ' + playable.manifestUrl);
-        })
-        .catch((e: any) => {
-          console.log('oopsie...', e);
-        });
-    }
+        } catch (err) {
+          console.log('oopsie...', err);
+        }
+      }
+    };
+    go();
   }, [player.current, playable]);
 
   return (

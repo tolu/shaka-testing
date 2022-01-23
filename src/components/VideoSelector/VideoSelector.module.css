@@ -27,6 +27,18 @@
 
   padding-inline: var(--gap);
   padding-block-end: calc(var(--gap) / 2);
+
+  /* hide scrollbars */
+  /*  - in Firefox */
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+  /*  - in IE */
+  -ms-overflow-style: none;
+}
+/* - in Safari, Chrome, Edge */
+.slider::-webkit-scrollbar { 
+  width: 0 !important;
+  display: none; 
 }
 .slider li {
   display: inline-block; /* removes the list-item bullet */
@@ -39,13 +51,15 @@
 .slider li figure {
   scroll-snap-align: start;
   display: grid;
+  gap: calc(var(--gap) / 3);
   margin: 0;
 }
 .slider li picture {
   aspect-ratio: 16/9;
-  width: 341px;
+  height: 200px;
+  grid-area: 1/1; /* makes it easy to place image overlays */
 }
-.slider li img {
+.slider picture img {
   /* smash into whatever box it's in */
   inline-size: 100%;
   block-size: 100%;
@@ -70,4 +84,20 @@
   overflow: hidden;
   white-space: nowrap;
   font-size: 20px;
+}
+
+.pictureOverlay {
+  grid-area: 1/1;
+  display: grid;
+  text-align: left;
+}
+.assetMeta {
+  display: inline-block;
+  padding: .5rem 1rem;
+  text-shadow: 1px 1px black;
+  font-size: 18px;
+}
+.serviceLogo {
+  justify-self: end;
+  width: 40px;
 }

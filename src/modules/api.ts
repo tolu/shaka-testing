@@ -22,7 +22,7 @@ export const getPlayable = async (
 };
 
 export interface Playable {
-  mediaFormat: 'widevine' | 'fairplay';
+  mediaFormat: 'widevine' | 'fairplay' | 'playready' | 'none';
   protocol: 'DASH' | 'HLS';
   manifestUrl: string;
   licenseUrl: string;

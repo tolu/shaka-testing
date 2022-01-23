@@ -4,7 +4,6 @@ import {
   getPlayable,
   getStartPageLists,
   getSwimlaneItems,
-  Playable,
 } from '../../modules/api';
 import { PlayerModel } from './Player';
 import styles from './VideoSelector.module.css';
@@ -94,6 +93,12 @@ const AssetList: FC<Props & { list: AssetLists['swimlanes'][0] }> = ({
                     />
                   </picture>
                   <figcaption>{a.card.title}</figcaption>
+                  <div className={styles.pictureOverlay}>
+                    <span className={styles.assetMeta}>{a.card.subtitles[0]?.value ?? ''}</span>
+                  </div>
+                  <div className={styles.pictureOverlay}>
+                    <img className={styles.serviceLogo} src={a.originChannel.logoUrlSvgSquare} />
+                  </div>
                 </figure>
               </a>
             </li>

@@ -16,7 +16,7 @@ const manifests = {
 
 const defaults: PlayerModel = {
   manifestUrl: manifests.nrkHls,
-  mediaFormat: 'widevine',
+  mediaFormat: 'none',
   protocol: 'HLS',
   licenseUrl: '',
   poster: 'https://gfx.nrk.no/CPyQLoJSo0GJ74VSznQqVwSlZmEmK6-eL4QQ_hAZIVdg',
