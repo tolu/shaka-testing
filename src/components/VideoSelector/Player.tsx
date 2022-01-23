@@ -2,6 +2,8 @@ import { useRef, useState, useCallback, useEffect } from 'react';
 import shaka from 'shaka-player';
 import { Playable } from '../../modules/api';
 
+// TODO: Get inspired by: https://github.com/matvp91/shaka-player-react/blob/master/src/index.js
+
 export type PlayerModel = Playable & { poster: string };
 export const Player: React.FC<{ playable: PlayerModel }> = ({ playable }) => {
   const video = useRef<HTMLVideoElement | null>(null);

@@ -8,6 +8,8 @@ import {
 import { PlayerModel } from './Player';
 import styles from './VideoSelector.module.css';
 
+// TODO: create component from media slider https://codepen.io/toblu/pen/ZEeWgxy
+
 interface Props {
   accessToken: string;
   setPlayable: (playable: PlayerModel) => void;
