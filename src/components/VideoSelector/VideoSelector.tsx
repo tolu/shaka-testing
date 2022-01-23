@@ -1,7 +1,12 @@
 import { FC, useCallback, useRef, useState } from 'react';
 import useSWRImmutable, { SWRConfiguration } from 'swr';
-import { getPlayable, getStartPageLists, getSwimlaneItems, Playable } from '../../modules/api';
-import { PlayerModel } from '../../Player';
+import {
+  getPlayable,
+  getStartPageLists,
+  getSwimlaneItems,
+  Playable,
+} from '../../modules/api';
+import { PlayerModel } from './Player';
 import styles from './VideoSelector.module.css';
 
 interface Props {
@@ -50,7 +55,7 @@ const AssetList: FC<Props & { list: AssetLists['swimlanes'][0] }> = ({
       console.log('Clicked', item);
       loadDetails(item._links.details.href, accessToken).then(playable => {
         console.log('setting playable', playable);
-        setPlayable({...playable, poster: item.card.image});
+        setPlayable({ ...playable, poster: item.card.image });
       });
     },
     [accessToken]
@@ -115,9 +120,11 @@ const swrConfig: SWRConfiguration = {
 };
 
 const getAuthConfig = (accessToken: string): RequestInit => {
-  return { headers: {
-    authorization: `Bearer ${accessToken}`,
-    ['x-rikstv-appinstallationid']: '11538a6c-4fd3-4bf6-b939-64febcae9aff',
-    ['x-rikstv-application']: 'Strim-Browser/beta',
-  } };
+  return {
+    headers: {
+      authorization: `Bearer ${accessToken}`,
+      ['x-rikstv-appinstallationid']: '11538a6c-4fd3-4bf6-b939-64febcae9aff',
+      ['x-rikstv-application']: 'Strim-Browser/beta',
+    },
+  };
 };

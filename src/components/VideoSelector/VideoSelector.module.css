@@ -31,7 +31,11 @@
 .slider li {
   display: inline-block; /* removes the list-item bullet */
 }
-.slider li a { color: white; display: inline-block; text-decoration: none; }
+.slider li a {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+}
 .slider li figure {
   scroll-snap-align: start;
   display: grid;
@@ -54,14 +58,11 @@
   overflow: hidden;
 
   /* if empty, show a gradient placeholder */
-  background-image:
-    linear-gradient(
-      to bottom,
-      hsl(0 0% 40%),
-      hsl(0 0% 20%)
-    );
+  background-image: linear-gradient(to bottom, hsl(0 0% 40%), hsl(0 0% 20%));
 }
-.slider li figure { margin: 0; }
+.slider li figure {
+  margin: 0;
+}
 .slider li figcaption {
   text-overflow: ellipsis;
   line-clamp: 1;

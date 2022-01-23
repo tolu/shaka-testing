@@ -1,10 +1,10 @@
 // mux.js is imported in index.html
 import styles from './App.module.css';
-import { Player, PlayerModel } from './Player';
-import { useAccessToken } from './TokenConfig';
+import { Player, PlayerModel } from './components/VideoSelector/Player';
+import { useAccessToken } from './components/TokenConfigurator/TokenConfig';
 import { VideoSelector } from './components/VideoSelector/VideoSelector';
 import { useState } from 'react';
-import { Playable } from './modules/api';
+import { TokenRelativeExpiry } from './components/TokenConfigurator/TokenRelativeExpiry';
 
 const manifests = {
   hls: 'https://storage.googleapis.com/shaka-demo-assets/angel-one-hls-apple/master.m3u8',
@@ -14,7 +14,13 @@ const manifests = {
     'https://nrk-od-32.akamaized.net/world/1193332/0/hls/muha13106879/playlist.m3u8?bw_low=10&bw_high=6000&bw_start=1800&no_iframes&no_audio_only&no_subtitles',
 };
 
-const defaults: PlayerModel = { manifestUrl: manifests.nrkHls, mediaFormat: 'widevine', protocol: 'HLS', licenseUrl: '', poster: 'https://gfx.nrk.no/CPyQLoJSo0GJ74VSznQqVwSlZmEmK6-eL4QQ_hAZIVdg' };
+const defaults: PlayerModel = {
+  manifestUrl: manifests.nrkHls,
+  mediaFormat: 'widevine',
+  protocol: 'HLS',
+  licenseUrl: '',
+  poster: 'https://gfx.nrk.no/CPyQLoJSo0GJ74VSznQqVwSlZmEmK6-eL4QQ_hAZIVdg',
+};
 
 function App() {
   const { token, TokenConfigurator } = useAccessToken();
@@ -26,15 +32,11 @@ function App() {
       </div>
     );
   }
-  const validityHours = (token.expires - Date.now())/1000/60/60;
-  console.log('Playable', {playable});
   return (
     <div className={styles.app}>
       <header>
         <h1>Shaka Experimenting</h1>
-        <p>{`Token expires ${new Intl.RelativeTimeFormat('en', {
-          style: 'long',
-        }).format(validityHours, 'hours')}`}</p>
+        <TokenRelativeExpiry token={token} />
       </header>
       <main>
         <Player playable={playable} />
