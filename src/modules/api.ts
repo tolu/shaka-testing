@@ -1,6 +1,8 @@
-
 export const getStartPageLists = async (options?: RequestInit) => {
-  const res = await fetch('https://contentlayout.rikstv.no/1/pages/start', options);
+  const res = await fetch(
+    'https://contentlayout.test.rikstv.no/1/pages/start',
+    options
+  );
   return (await res.json()) as StartPageResponse;
 };
 
@@ -9,6 +11,22 @@ export const getSwimlaneItems = async (url: string, options?: RequestInit) => {
   const data = (await res.json()) as SwimlaneItem[];
   return data.filter(({ streamingMode }) => streamingMode === 'OnDemand');
 };
+
+export const getPlayable = async (
+  links: SwimlaneItemLinks,
+  options?: RequestInit
+) => {
+  const res = await fetch(links.playDash.href, options);
+  const data = (await res.json()) as Playable;
+  return data;
+};
+
+export interface Playable {
+  mediaFormat: 'widevine' | 'fairplay';
+  protocol: 'DASH' | 'HLS';
+  manifestUrl: string;
+  licenseUrl: string;
+}
 
 interface StartPageResponse {
   id: string;
@@ -54,6 +72,11 @@ interface SwimlaneItemLinks {
   wish: HalLink;
   excludeFromContinueWatching: HalLink;
   universalplay: HalLink;
+  // only from /title
+  playDash: HalLink;
+  playDashPR: HalLink;
+  playHLSF: HalLink;
+  playSS: HalLink;
 }
 
 interface HalLink {
@@ -85,6 +108,6 @@ interface OriginChannel {
   logoUrlSvgSquare: string;
 }
 
-type StreamingMode = 'External' | 'OnDemand';
+type StreamingMode = 'External' | 'OnDemand' | 'None';
 
 type TitleType = 'Linear' | 'SVOD';
