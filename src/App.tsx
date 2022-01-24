@@ -1,6 +1,6 @@
 // mux.js is imported in index.html
 import styles from './App.module.css';
-import { Player, PlayerModel } from './components/Player/Player';
+import { Player, VideoAsset } from './components/Player/Player';
 import { useAccessToken } from './components/TokenConfigurator/TokenConfig';
 import { VideoSelector } from './components/VideoSelector/VideoSelector';
 import { useState } from 'react';
@@ -14,7 +14,7 @@ const manifests = {
     'https://nrk-od-32.akamaized.net/world/1193332/0/hls/muha13106879/playlist.m3u8?bw_low=10&bw_high=6000&bw_start=1800&no_iframes&no_audio_only&no_subtitles',
 };
 
-const defaults: PlayerModel = {
+const defaults: VideoAsset = {
   manifestUrl: manifests.nrkHls,
   mediaFormat: 'none',
   protocol: 'HLS',
@@ -24,7 +24,7 @@ const defaults: PlayerModel = {
 
 function App() {
   const { token, TokenConfigurator } = useAccessToken();
-  const [playable, setPlayable] = useState<PlayerModel>(defaults);
+  const [playable, setPlayable] = useState<VideoAsset>(defaults);
   if (!token) {
     return (
       <div className={styles.app}>

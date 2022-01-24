@@ -1,8 +1,6 @@
 import { FC } from 'react';
 
-export const TokenRelativeExpiry: FC<{ token: { expires: number } }> = ({
-  token,
-}) => {
+export const TokenRelativeExpiry: FC<{ token: { expires: number } }> = ({ token }) => {
   const validityHours = (token.expires - Date.now()) / 1000 / 60 / 60;
   const flooredHours = Math.floor(validityHours);
   const minutes = Math.floor((validityHours - flooredHours) * 60);

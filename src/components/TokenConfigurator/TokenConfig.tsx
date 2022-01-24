@@ -26,11 +26,7 @@ export const useAccessToken = () => {
     (value: string) => {
       try {
         const token = jwtDecode<RtvToken>(value);
-        if (
-          token &&
-          Number.isInteger(token.exp) &&
-          token.exp > Date.now() / 1000
-        ) {
+        if (token && Number.isInteger(token.exp) && token.exp > Date.now() / 1000) {
           console.log('got valid token', token);
           const newToken = { value, expires: token.exp * 1000 };
           sessionStorage.setItem(tokenStorageKey, JSON.stringify(newToken));
@@ -49,9 +45,7 @@ export const useAccessToken = () => {
   };
 };
 
-const TokenConfig: FC<{ setToken: (value: string) => void }> = ({
-  setToken,
-}) => {
+const TokenConfig: FC<{ setToken: (value: string) => void }> = ({ setToken }) => {
   return (
     <>
       <h1>Paste token to continue</h1>

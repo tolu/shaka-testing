@@ -1,8 +1,5 @@
 export const getStartPageLists = async (options?: RequestInit) => {
-  const res = await fetch(
-    'https://contentlayout.test.rikstv.no/1/pages/start',
-    options
-  );
+  const res = await fetch('https://contentlayout.test.rikstv.no/1/pages/start', options);
   return (await res.json()) as StartPageResponse;
 };
 
@@ -12,20 +9,21 @@ export const getSwimlaneItems = async (url: string, options?: RequestInit) => {
   return data.filter(({ streamingMode }) => streamingMode === 'OnDemand');
 };
 
-export const getPlayable = async (
-  links: SwimlaneItemLinks,
-  options?: RequestInit
-) => {
-  const res = await fetch(links.playDash.href, options);
+const isSafari =
+  typeof navigator !== 'undefined' && /Version\/[\d\.]+.*Safari/.test(navigator.userAgent);
+export const getPlayable = async (links: SwimlaneItemLinks, options?: RequestInit) => {
+  const res = await fetch(isSafari ? links.playHLSF.href : links.playDash.href, options);
   const data = (await res.json()) as Playable;
   return data;
 };
 
+// TODO: create separate model for fairplay with appCert
 export interface Playable {
-  mediaFormat: 'widevine' | 'fairplay' | 'playready' | 'none';
+  mediaFormat: 'fairplay' | 'widevine' | 'playready' | 'none';
   protocol: 'DASH' | 'HLS';
   manifestUrl: string;
   licenseUrl: string;
+  applicationCertificate?: string; // set for fairplay
 }
 
 interface StartPageResponse {

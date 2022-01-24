@@ -36,9 +36,9 @@
   -ms-overflow-style: none;
 }
 /* - in Safari, Chrome, Edge */
-.slider::-webkit-scrollbar { 
+.slider::-webkit-scrollbar {
   width: 0 !important;
-  display: none; 
+  display: none;
 }
 .slider li {
   display: inline-block; /* removes the list-item bullet */
@@ -93,7 +93,7 @@
 }
 .assetMeta {
   display: inline-block;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   text-shadow: 1px 1px black;
   font-size: 18px;
 }

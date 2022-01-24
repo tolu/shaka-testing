@@ -1,18 +1,14 @@
 import { FC, useCallback, useRef, useState } from 'react';
 import useSWRImmutable, { SWRConfiguration } from 'swr';
-import {
-  getPlayable,
-  getStartPageLists,
-  getSwimlaneItems,
-} from '../../modules/api';
-import { PlayerModel } from '../Player/Player';
+import { getPlayable, getStartPageLists, getSwimlaneItems } from '../../modules/api';
+import { VideoAsset } from '../Player/Player';
 import styles from './VideoSelector.module.css';
 
 // TODO: create component from media slider https://codepen.io/toblu/pen/ZEeWgxy
 
 interface Props {
   accessToken: string;
-  setPlayable: (playable: PlayerModel) => void;
+  setPlayable: (playable: VideoAsset) => void;
 }
 
 export const VideoSelector: FC<Props> = props => {
@@ -71,28 +67,17 @@ const AssetList: FC<Props & { list: AssetLists['swimlanes'][0] }> = ({
   const title = `${list.name} (${list.type.toLowerCase()})`;
   const isLoading = data.length === 0 && isValidating;
   return (
-    <details
-      className={styles.details}
-      ref={detailsRef}
-      onToggle={handleToggle}
-    >
+    <details className={styles.details} ref={detailsRef} onToggle={handleToggle}>
       <summary>{title}</summary>
       {isLoading && <p>Loading...</p>}
       <ul className={styles.slider}>
         {data.map(a => {
           return (
             <li key={a.id}>
-              <a
-                href="#"
-                onClick={evt => (evt.preventDefault(), handleVideoClick(a))}
-              >
+              <a href="#" onClick={evt => (evt.preventDefault(), handleVideoClick(a))}>
                 <figure>
                   <picture>
-                    <img
-                      src={`${a.card.image}?height=200`}
-                      alt={a.card.title}
-                      loading="lazy"
-                    />
+                    <img src={`${a.card.image}?height=200`} alt={a.card.title} loading="lazy" />
                   </picture>
                   <figcaption>{a.card.title}</figcaption>
                   <div className={styles.pictureOverlay}>
