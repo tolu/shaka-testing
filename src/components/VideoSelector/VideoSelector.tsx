@@ -5,7 +5,7 @@ import {
   getStartPageLists,
   getSwimlaneItems,
 } from '../../modules/api';
-import { PlayerModel } from './Player';
+import { PlayerModel } from '../Player/Player';
 import styles from './VideoSelector.module.css';
 
 // TODO: create component from media slider https://codepen.io/toblu/pen/ZEeWgxy

@@ -1,6 +1,6 @@
 // mux.js is imported in index.html
 import styles from './App.module.css';
-import { Player, PlayerModel } from './components/VideoSelector/Player';
+import { Player, PlayerModel } from './components/Player/Player';
 import { useAccessToken } from './components/TokenConfigurator/TokenConfig';
 import { VideoSelector } from './components/VideoSelector/VideoSelector';
 import { useState } from 'react';
