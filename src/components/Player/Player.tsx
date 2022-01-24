@@ -22,15 +22,13 @@ export const Player: React.FC<{ playable: PlayerModel }> = ({ playable }) => {
         setLoading(s => false);
       }
     },
-    [playable]
+    []
   );
   useEffect(() => {
     const go = async () => {
 
       if (player.current && playable) {
         if (playable.licenseUrl && playable.mediaFormat !== 'none') {
-          console.log('configure drm...', playable.mediaFormat);
-          await player.current.unload();
           player.current.configure({
             drm: {
               ...getDrmConfig(playable.mediaFormat, playable.licenseUrl),
@@ -39,7 +37,7 @@ export const Player: React.FC<{ playable: PlayerModel }> = ({ playable }) => {
         }
         console.log('loading manifest', playable.manifestUrl);
         try {
-          await player.current.load(playable.manifestUrl)
+          await player.current.load(playable.manifestUrl);
           // This runs if the asynchronous load is successful.
           console.log('The video has now been loaded! ' + playable.manifestUrl);
         } catch (err) {
