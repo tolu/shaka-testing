@@ -10,6 +10,11 @@
 
 - [shaka error codes](https://shaka-player-demo.appspot.com/docs/api/shaka.util.Error.html#.Code)
 
+### Inspiration to look at
+
+- https://github.com/vimond/replay
+- https://vimond.github.io/replay/#/
+
 ### Resources
 
 [YouTube: The Shaka Player by Joey Parrish](https://www.youtube.com/watch?v=wmZz97HsCNo)
