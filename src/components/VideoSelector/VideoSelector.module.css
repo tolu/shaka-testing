@@ -1,0 +1,103 @@
+.section {
+  max-width: 100vw;
+  min-width: 100vw;
+}
+
+.details summary {
+  cursor: pointer;
+}
+.details[open] summary {
+  text-decoration: underline;
+  color: cyan;
+}
+.slider {
+  --gap: 2rem;
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: left;
+  gap: calc(var(--gap) / 2);
+  margin: 0;
+
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scroll-padding-inline: var(--gap);
+
+  padding-block: 2rem;
+
+  padding-inline: var(--gap);
+  padding-block-end: calc(var(--gap) / 2);
+
+  /* hide scrollbars */
+  /*  - in Firefox */
+  overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
+  /*  - in IE */
+  -ms-overflow-style: none;
+}
+/* - in Safari, Chrome, Edge */
+.slider::-webkit-scrollbar {
+  width: 0 !important;
+  display: none;
+}
+.slider li {
+  display: inline-block; /* removes the list-item bullet */
+}
+.slider li a {
+  color: white;
+  display: inline-block;
+  text-decoration: none;
+}
+.slider li figure {
+  scroll-snap-align: start;
+  display: grid;
+  gap: calc(var(--gap) / 3);
+  margin: 0;
+}
+.slider li picture {
+  aspect-ratio: 16/9;
+  height: 200px;
+  grid-area: 1/1; /* makes it easy to place image overlays */
+}
+.slider picture img {
+  /* smash into whatever box it's in */
+  inline-size: 100%;
+  block-size: 100%;
+
+  /* don't squish but do cover the space */
+  object-fit: cover;
+
+  /* soften the edges */
+  border-radius: 8px;
+  overflow: hidden;
+
+  /* if empty, show a gradient placeholder */
+  background-image: linear-gradient(to bottom, hsl(0 0% 40%), hsl(0 0% 20%));
+}
+.slider li figure {
+  margin: 0;
+}
+.slider li figcaption {
+  text-overflow: ellipsis;
+  line-clamp: 1;
+  /* Needed to make it work */
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.pictureOverlay {
+  grid-area: 1/1;
+  display: grid;
+  text-align: left;
+}
+.assetMeta {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  text-shadow: 1px 1px black;
+  font-size: 18px;
+}
+.serviceLogo {
+  justify-self: end;
+  width: 40px;
+}

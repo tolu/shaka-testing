@@ -1,0 +1,19 @@
+.app {
+  text-align: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.appLink {
+  color: #61dafb;
+}
+
+.input {
+  width: 30ch;
+  line-height: 1.5;
+}
